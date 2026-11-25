@@ -19,7 +19,11 @@
 
   function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 8); }
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.requestAnimationFrame(onScroll);
+
+  // Galerie : masque les cadres « à venir » dès qu'une photo existe (navigateurs sans :has())
+  var gallery = document.querySelector('.gallery');
+  if (gallery && gallery.querySelector('.photo')) gallery.classList.add('has-photos');
 
   // Lien de menu actif selon la section visible
   var links = menu.querySelectorAll('a[href^="#"]');
